@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <header class="bg-danger text-white text-center p-2">
+    <h2><span class="bi bi-cart"></span>Shopping Cart Demo</h2>
+  </header>
+
+  <div class="row mt-2">
+    <div class="col-2">
+      <div>
+        <label class="form-label">Select a Category</label>
+        <div>
+          <select class="form-select">
+            <option *ngFor="let category of catgories" [value]="category">
+              {{ category | titlecase }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-7"></div>
+
+    <div class="col-3"></div>
+  </div>
+</div>
