@@ -8,7 +8,7 @@
       <div>
         <label class="form-label">Select a Category</label>
         <div>
-          <select class="form-select">
+          <select (change)="onCategoryChanged($event)" class="form-select">
             <option *ngFor="let category of catgories" [value]="category">
               {{ category | titlecase }}
             </option>
@@ -17,7 +17,38 @@
       </div>
     </div>
 
-    <div class="col-7"></div>
+    <div class="col-7">
+      <div class="d-flex flex-wrap overflow-auto" style="height: 550px">
+        <div
+          style="width: 200px"
+          [class.oddRow-style]="o"
+          [class.evenRow-style]="e"
+          class="card m-2 p-2"
+          *ngFor="let product of products; let o = odd; let e = even"
+        >
+          <img [src]="product.image" height="150" class="card-img-top" />
+          <div class="card-header" style="height: 180px">
+            <p>{{ product.title }}</p>
+          </div>
+          <div class="card-body">
+            <dl>
+              <dt>Price</dt>
+              <dd>{{ product.price }}</dd>
+              <dt>Rating</dt>
+              <dd>
+                <span class="bi bi-star-fill text-success"></span
+                >{{ product.rating.rate }} [{{ product.rating.count }}]
+              </dd>
+            </dl>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-danger w-100">
+              <span class="bi bi-card4"></span>Add to Shopping Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="col-3"></div>
   </div>

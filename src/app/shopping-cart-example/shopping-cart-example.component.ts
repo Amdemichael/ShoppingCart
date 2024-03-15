@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class ShoppingCartExampleComponent implements OnInit {
   catgories!: any[];
 
+  products!: any[];
+
   constructor() {}
 
   ngOnInit(): void {
@@ -18,8 +20,26 @@ export class ShoppingCartExampleComponent implements OnInit {
     fetch('https://fakestoreapi.com/products/categories')
       .then((res) => res.json())
       .then((data) => {
-        data.unshift('All Categories');
+        data.unshift('all');
         this.catgories = data;
       });
+  }
+
+  getAllProductsCategoriesWise(url: string) {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        this.products = data;
+      });
+  }
+
+  onCategoryChanged(e: any) {
+    if (e.target.value == 'all') {
+      this.getAllProductsCategoriesWise('https://fakestoreapi.com/products');
+    } else {
+      this.getAllProductsCategoriesWise(
+        `https://fakestoreapi.com/products/category/${e.target.value}`
+      );
+    }
   }
 }
